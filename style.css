@@ -1,0 +1,45 @@
+/* heading */
+.heading{
+    background-color: rebeccapurple;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+/* left side */
+#input{
+    margin-left: 10px;
+}
+
+h4{
+    text-align: center;
+    padding-top: 10px;
+}
+/* city button */
+.city{
+    display: block;
+    background-color: rebeccapurple;
+    border: none;
+    width: 200px;
+    margin: 0 auto 10px auto;
+}
+/* right side */
+h2{
+    padding: 20px;
+}
+
+.weather{
+    font-size: 20px;
+}
+
+.warning{
+    width: 100px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+
+

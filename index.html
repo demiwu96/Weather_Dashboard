@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- icon -->
+    <script src="https://kit.fontawesome.com/29e5db4ce1.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+
+<body>
+    <nav class="heading">Weather Dashboard</nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5" style="background-color: rgb(232, 212, 245);">
+                <h4>Search your city</h4>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" placeholder="Which city are you in..." id="input">
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" id="search">Search</button>
+                </form>
+                <div id="buttonDiv">
+                    <h4>Search History</h4>
+                </div>
+            </div>
+            <div class="col-md-7" style="background-color: rgb(225, 184, 248);">
+                <h3>Current Weather</h3>
+                <div class="row">
+                    <h2></h2>
+                    <div id="icon">
+                        <i class="fas fa-2x"></i>
+                        <p id="description"></p>
+                    </div>
+                </div>
+                <div class="weather">Wind speed: <span class="wind"></span>m/s</div>
+                <div class="weather">Humidity: <span class="humidity"></span>%</div>
+                <div class="weather">Temperature: <span class="temp"></span>°C</div>
+                <div class="weather" id="uvIndex">UV index: <span class="uv"></span></div>
+                <button class="btn warning"></button>
+                <div class="row">
+                    5 day forecast
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
