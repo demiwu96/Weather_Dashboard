@@ -1,3 +1,23 @@
+// day, date
+var date;
+var day;
+// update time, day, date
+update();
+
+function update() {
+    var dt = new Date();
+    var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    date = months[dt.getMonth()] + ', ' + dt.getDate() + ', ' + dt.getFullYear();
+    day = day[dt.getDay()];
+
+    document.getElementById("dateDiv").innerHTML = date;
+    document.getElementById("dayDiv").innerHTML = day;
+    setTimeout(update, 3.6e+6);
+};
+
+var time = Date.UTC(2020, 02, 27);
+
 var uvIndex;
 
 $(document).ready(function () {
@@ -6,7 +26,7 @@ $(document).ready(function () {
     var APIKey = "e8c4953eaa486f7433658a72934020a9";
     var cityList = [];
 
-    $("#search").click(getWeather);
+    $("#search").click(fiveDayForecast);
 
     function getWeather() {
         event.preventDefault();
@@ -82,6 +102,24 @@ $(document).ready(function () {
                 $(".warning").css("backgroundColor", "violet");
             }
         });
+    };
+
+    function fiveDayForecast() {
+        event.preventDefault();
+        var cityName = $("#input").val();
+        cityList.push(cityName);
+        // URL 
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?&units=metric&q=" + cityName + "&appid=" + APIKey;
+        //AJAX
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            console.log(response.list[0].dt_txt);
+            console.log(time);
+        });
+
     };
 
     function displayBttn() {
