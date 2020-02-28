@@ -16,7 +16,7 @@ function update() {
     setTimeout(update, 3.6e+6);
 };
 
-var time = Date.UTC(2020, 02, 27);
+// var time = Date.UTC(2020, 02, 27);
 
 var uvIndex;
 
@@ -42,9 +42,9 @@ $(document).ready(function () {
         }).then(function (response) {
             // show information
             $("h2").text(cityName);
-            $(".wind").text(response.wind.speed);
-            $(".humidity").text(response.main.humidity);
-            $(".temp").text(response.main.temp);
+            $(".wind").text(response.wind.speed + "m/s");
+            $(".humidity").text(response.main.humidity + "%");
+            $(".temp").text(response.main.temp + "°C");
             // show icons
             var weather = response.weather[0].main;
             changeIcon(weather);
@@ -116,9 +116,54 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            console.log(response.list[0].dt_txt);
-            console.log(time);
+            var list = response.list;
+            for (var i = 0; i < list.length; i = i + 8) {
+                // create the html that you have in the other file
+                // load the data in to that html as you're building it
+                // attach the html to the screen
+                // worry about bootstraps rows/columns later
+                var cardTitle = list[i].dt_txt;
+                var temp = list[i].main.temp;
+                var wind = list[i].wind.speed;
+                var hum = list[i].main.humidity;
+                var weather = list[i].weather[0].main;
+                var weatherDescription = list[i].weather[0].description;
+                console.log("temp" + temp);
+                console.log("wind" + wind);
+                console.log("hum" + hum);
+                console.log(list[i].dt_txt);
+                createCard(cardTitle, wind, hum, temp, weather, weatherDescription);
+            };
+            console.log(response.list);
         });
+
+        function createCard(cardTitle, wind, hum, temp, weather, weatherDescription) {
+            var colDiv = $("<div>");
+            colDiv.addClass("col-lg-4 col-md-6 col-sm-6 w-auto");
+            var cardDiv = $("<div>");
+            cardDiv.addClass("card w-auto");
+            var cardBodyDiv = $("<div>");
+            cardBodyDiv.addClass("card-body");
+            var cardTitle = $("<h5>");
+            cardTitle.text(cardTitle.val());
+            var descriptionP = $("<p>");
+            descriptionP.text(weatherDescription);
+            var icon = $("<i>");
+            icon.addClass("fas fa-lg");
+            changeIcon(weather);
+            var windP = $("<p>");
+            windP.text(wind + "m/s");
+            console.log("wind");
+            var humP = $("<p>");
+            humP.text(hum + "%");
+            console.log("humidity");
+            var tempP = $("<p>");
+            tempP.text(temp + "°C");
+            cardBodyDiv.append(cardTitle, icon, descriptionP, windP, humP, tempP);
+            cardDiv.append(cardBodyDiv);
+            colDiv.append(cardDiv);
+            $("#forecastDiv").append(colDiv);
+        };
 
     };
 
@@ -147,9 +192,9 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             $("h2").text(city);
-            $(".wind").text(response.wind.speed);
-            $(".humidity").text(response.main.humidity);
-            $(".temp").text(response.main.temp);
+            $(".wind").text(response.wind.speed + "m/s");
+            $(".humidity").text(response.main.humidity + "%");
+            $(".temp").text(response.main.temp + "°C");
             var lat = response.coord.lat;
             var lon = response.coord.lon;
             getUVIndex(lat, lon);

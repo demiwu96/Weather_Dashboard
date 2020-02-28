@@ -3,11 +3,19 @@
     background-color: rebeccapurple;
     color: white;
     text-align: center;
-    font-size: 30px;
     width: 100%;
-    padding-top: 15px;
-    padding-bottom: 15px;
     height: 200px;
+}
+
+nav{
+    font-size: 30px;
+    padding-top: 10px;
+}
+
+.heading p{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 /* left side */
 #input{
