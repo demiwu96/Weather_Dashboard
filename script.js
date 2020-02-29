@@ -32,7 +32,8 @@ $(document).ready(function () {
         event.preventDefault();
         // get input value
         var cityName = $("#input").val();
-        cityList.push(cityName);
+        // generate the buttons
+        addBttn(cityName);
         // URL 
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=" + cityName + "&appid=" + APIKey;
         //AJAX
@@ -55,12 +56,11 @@ $(document).ready(function () {
             // call function to get uv index
             getUVIndex(lat, lon);
 
-            // generate the buttons
-            var bttn = $("<button>");
-            bttn.attr("data-name", cityName);
-            bttn.text(cityName);
-            bttn.addClass("city btn btn-lg btn-primary");
-            $("#buttonDiv").append(bttn);
+            // var bttn = $("<button>");
+            // bttn.attr("data-name", cityName);
+            // bttn.text(cityName);
+            // bttn.addClass("city btn btn-lg btn-primary");
+            // $("#buttonDiv").append(bttn);
 
             // local storage
             localStorage.setItem("cityList", JSON.stringify(cityList))
@@ -105,6 +105,20 @@ $(document).ready(function () {
                 $(".warning").css("backgroundColor", "violet");
             }
         });
+    };
+
+    function addBttn(cityName) {
+        var upper = cityName.toUpperCase();
+        if (cityList.indexOf(upper) !== -1) {
+            alert("Already has this city");
+        } else {
+            cityList.push(upper);
+            var bttn = $("<button>");
+            bttn.attr("data-name", upper);
+            bttn.text(upper);
+            bttn.addClass("city btn btn-lg btn-primary");
+            $("#buttonDiv").append(bttn);
+        };
     };
 
     // get 5 day forecast
