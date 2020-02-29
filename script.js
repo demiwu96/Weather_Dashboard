@@ -78,8 +78,8 @@ $(document).ready(function () {
                 $(".warning").text("Low");
                 $(".warning").css("backgroundColor", "green");
             } else if (response.value < 6) {
-                $("#uvIndex").css("color", "rgb(255, 217, 4)");
-                $(".uv").css("color", "rgb(255, 217, 4)");
+                $("#uvIndex").css("color", "yellow");
+                $(".uv").css("color", "yellow");
                 $(".warning").text("Moderate");
                 $(".warning").css("backgroundColor", "rgb(255, 217, 4)");
             } else if (response.value < 8) {

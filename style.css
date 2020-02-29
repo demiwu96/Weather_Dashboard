@@ -19,7 +19,7 @@ nav{
     margin-bottom: 10px;
 }
 /* left side on big screen */
-#searchDiv{
+#leftDiv{
     background-color: rgb(255, 246, 167);
 }
 
@@ -54,9 +54,9 @@ h4{
 }
 
 /* right side on big screen */
-#currentDiv{
-    background-color: rgb(244, 210, 255);
-    font-family: 'Cormorant';
+#rightDiv{
+    background-color: rgb(211, 196, 247);
+    font-family: 'Playfair Display';
     padding-left: 50px;
 }
 
