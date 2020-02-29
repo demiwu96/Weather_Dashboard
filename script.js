@@ -19,21 +19,24 @@ function update() {
 };
 
 $(document).ready(function () {
+    $("#error").hide();
     displayBttn();
 
     var APIKey = "e8c4953eaa486f7433658a72934020a9";
     var cityList = [];
 
     $("#search").click(getWeather);
-    $("#search").click(fiveDayForecast);
+    // $("#search").click(fiveDayForecast);
+    $(document).on("click", ".city", displayInfo);
+    $("#error").on("click", function () {
+        $(this).hide();
+    });
 
     // get current weather
     function getWeather() {
         event.preventDefault();
         // get input value
         var cityName = $("#input").val();
-        // generate the buttons
-        addBttn(cityName);
         // URL 
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=" + cityName + "&appid=" + APIKey;
         //AJAX
@@ -41,8 +44,11 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+            // generate the buttons
+            addBttn(cityName);
             // show information
-            $("h2").text(cityName);
+            $(".weather").css("display", "block");
+            $("#cityTitle").text(cityName);
             $(".wind").text(response.wind.speed + " m/s");
             $(".humidity").text(response.main.humidity + "%");
             $(".temp").text(response.main.temp + " °C");
@@ -59,6 +65,9 @@ $(document).ready(function () {
             // local storage
             localStorage.setItem("cityList", JSON.stringify(cityList))
             $("#input").val("");
+        });
+        $(document).ajaxError(function () {
+            $("#error").show();
         });
 
     };
@@ -215,7 +224,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            $("h2").text(city);
+            $("#cityTitle").text(city);
             $(".wind").text(response.wind.speed + " m/s");
             $(".humidity").text(response.main.humidity + "%");
             $(".temp").text(response.main.temp + " °C");
@@ -273,7 +282,4 @@ $(document).ready(function () {
             $("#currentIcon").addClass("fa-exclamation-circle").removeClass("fa-cloud-rain fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt");
         };
     };
-
-    $(document).on("click", ".city", displayInfo);
-
 });
