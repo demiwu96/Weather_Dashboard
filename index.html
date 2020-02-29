@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <!-- heading -->
     <div class="heading">
         <nav>Weather Dashboard</nav>
         <p id="dateDiv"></p>
@@ -28,25 +29,30 @@
     <main>
         <div class="container-fluid">
             <div class="row">
+                <!-- left section -->
                 <div class="col-md-5" id="leftDiv">
                     <h4>Search your city</h4>
+                    <!-- city input and search bttn -->
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" placeholder="Which city are you in....." id="input">
                         <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" id="search">Search <i
                                 class="fas fa-search-location"></i></button>
                     </form>
-                    <!-- <p id="error">*****Error: your city was not found*****</p> -->
+                    <!-- error alert -->
                     <div class="alert alert-danger" role="alert" id="error">
                         Error: your city was not found ***** Click to dismiss *****
                     </div>
+                    <!-- show city bttns  -->
                     <div id="buttonDiv">
                         <h4>Search History</h4>
                     </div>
                 </div>
+                <!-- right section -->
                 <div class="col-md-7" id="rightDiv">
                     <div class="row">
                         <h3>Current Weather</h3>
                     </div>
+                    <!-- show current city and weather -->
                     <div class="row" id="currentWeather">
                         <h2 id="cityTitle"></h2>
                         <div id="icon">
@@ -54,15 +60,18 @@
                             <p id="description"></p>
                         </div>
                     </div>
+                    <!-- weather details -->
                     <div class="weather" style="display: none;">Wind speed: <span class="wind"></span></div>
                     <div class="weather" style="display: none;">Humidity: <span class="humidity"></span></div>
                     <div class="weather" style="display: none;">Temperature: <span class="temp"></span></div>
                     <div class="weather" style="display: none;" id="uvIndex">UV index: <span class="uv"></span>
                     </div>
+                    <!-- show uv index level -->
                     <button class="btn warning"></button>
                     <div class="row">
                         <h3>5 Day Forecast</h3>
                     </div>
+                    <!-- show 5 days forecast -->
                     <div class="row" id="forecastDiv">
                     </div>
                 </div>

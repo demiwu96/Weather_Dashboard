@@ -200,14 +200,14 @@ $(document).ready(function () {
 
     // display city bttn from local storage
     function displayBttn() {
-        var array = JSON.parse(localStorage.getItem("cityList"));
-        if (!array) {
+        var cityList = JSON.parse(localStorage.getItem("cityList"));
+        if (!cityList) {
             return;
         };
-        for (var i = 0; i < array.length; i++) {
+        for (var i = 0; i < cityList.length; i++) {
             var bttn = $("<button>");
-            bttn.attr("data-name", array[i]);
-            bttn.text(array[i]);
+            bttn.attr("data-name", cityList[i]);
+            bttn.text(cityList[i]);
             bttn.addClass("city btn btn-lg btn-primary");
             $("#buttonDiv").append(bttn);
         };
@@ -228,6 +228,7 @@ $(document).ready(function () {
             $(".wind").text(response.wind.speed + " m/s");
             $(".humidity").text(response.main.humidity + "%");
             $(".temp").text(response.main.temp + " °C");
+            $(".weather").css("display", "block");
             var lat = response.coord.lat;
             var lon = response.coord.lon;
             getUVIndex(lat, lon);

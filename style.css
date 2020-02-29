@@ -29,11 +29,13 @@ form{
 
 #search{
     font-family: 'Abril Fatface';
+    margin: 10px;
 }
 
 #input{
     margin-left: 10px;
     width: 230px;
+    margin: 10px;
 }
 
 h4{
@@ -57,7 +59,8 @@ h4{
 #rightDiv{
     background-color: rgb(211, 196, 247);
     font-family: 'Playfair Display';
-    padding-left: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #cityTitle{
@@ -85,7 +88,5 @@ h3{
 .cardMargin{
     margin-bottom: 10px;
 }
-
-/* Error */
 
 
