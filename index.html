@@ -26,22 +26,25 @@
     <main>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-5" style="background-color: rgb(232, 212, 245);">
+                <div class="col-md-5" id="searchDiv">
                     <h4>Search your city</h4>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" placeholder="Which city are you in....." id="input">
-                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" id="search">Search</button>
+                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" id="search">Search <i
+                                class="fas fa-search-location"></i></button>
                     </form>
                     <div id="buttonDiv">
                         <h4>Search History</h4>
                     </div>
                 </div>
-                <div class="col-md-7" style="background-color: rgb(225, 184, 248);">
-                    <h3>Current Weather</h3>
+                <div class="col-md-7" id="currentDiv">
+                    <div class="row">
+                        <h3>Current Weather</h3>
+                    </div>
                     <div class="row">
                         <h2></h2>
                         <div id="icon">
-                            <i class="fas fa-2x" id="currentIcon"></i>
+                            <i class="fas fa-3x" id="currentIcon"></i>
                             <p id="description"></p>
                         </div>
                     </div>

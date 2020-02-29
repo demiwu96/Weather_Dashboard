@@ -47,7 +47,7 @@ $(document).ready(function () {
             $(".temp").text(response.main.temp + " °C");
             // show icons
             var weather = response.weather[0].main;
-            changeIcon($("#currentIcon"), weather);
+            changeIcon(weather);
             $("#description").text(response.weather[0].description);
             // get coordinates
             var lat = response.coord.lat;
@@ -153,8 +153,22 @@ $(document).ready(function () {
         var descriptionP = $("<p>");
         descriptionP.text(weatherDescription);
         var icon = $("<i>");
-        icon.addClass("fas fa-lg");
-        changeIcon(icon, weather);
+        icon.addClass("fas fa-2x");
+        if (weather == "Snow") {
+            icon.addClass("fa-snowflake").removeClass("fa-sun fa-cloud fa-cloud-rain fa-cloud-showers-heavy fa-bolt fa-exclamation-circle");
+        } else if (weather == "Clear") {
+            icon.addClass("fa-sun").removeClass("fa-cloud fa-cloud-rain fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
+        } else if (weather == "Clouds") {
+            icon.addClass("fa-cloud").removeClass("fa-sun fa-cloud-rain fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
+        } else if (weather == "Rain") {
+            icon.addClass("fa-cloud-showers-heavy").removeClass("fa-sun fa-cloud fa-cloud-rain fa-snowflake fa-bolt fa-exclamation-circle");
+        } else if (weather == "Thunderstorm") {
+            icon.addClass("fa-bolt").removeClass("fa-sun fa-cloud fa-cloud-rain fa-snowflake fa-cloud-showers-heavy fa-exclamation-circle");
+        } else if (weather == "Drizzle") {
+            icon.addClass("fa-cloud-rain").removeClass("fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
+        } else {
+            icon.addClass("fa-exclamation-circle").removeClass("fa-cloud-rain fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt");
+        };
         var windP = $("<p>");
         windP.text("Wind speed: " + wind + " m/s");
         var humP = $("<p>");
@@ -234,22 +248,21 @@ $(document).ready(function () {
     };
 
     // change weather icons
-    function changeIcon(targetEl, weather) {
-        var target = targetEl;
+    function changeIcon(weather) {
         if (weather == "Snow") {
-            target.addClass("fa-snowflake").removeClass("fa-sun fa-cloud fa-cloud-rain fa-cloud-showers-heavy fa-bolt fa-exclamation-circle");
+            $("#currentIcon").addClass("fa-snowflake").removeClass("fa-sun fa-cloud fa-cloud-rain fa-cloud-showers-heavy fa-bolt fa-exclamation-circle");
         } else if (weather == "Clear") {
-            target.addClass("fa-sun").removeClass("fa-cloud fa-cloud-rain fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
+            $("#currentIcon").addClass("fa-sun").removeClass("fa-cloud fa-cloud-rain fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
         } else if (weather == "Clouds") {
-            target.addClass("fa-cloud").removeClass("fa-sun fa-cloud-rain fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
+            $("#currentIcon").addClass("fa-cloud").removeClass("fa-sun fa-cloud-rain fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
         } else if (weather == "Rain") {
-            target.addClass("fa-cloud-showers-heavy").removeClass("fa-sun fa-cloud fa-cloud-rain fa-snowflake fa-bolt fa-exclamation-circle");
+            $("#currentIcon").addClass("fa-cloud-showers-heavy").removeClass("fa-sun fa-cloud fa-cloud-rain fa-snowflake fa-bolt fa-exclamation-circle");
         } else if (weather == "Thunderstorm") {
-            target.addClass("fa-bolt").removeClass("fa-sun fa-cloud fa-cloud-rain fa-snowflake fa-cloud-showers-heavy fa-exclamation-circle");
+            $("#currentIcon").addClass("fa-bolt").removeClass("fa-sun fa-cloud fa-cloud-rain fa-snowflake fa-cloud-showers-heavy fa-exclamation-circle");
         } else if (weather == "Drizzle") {
-            target.addClass("fa-cloud-rain").removeClass("fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
+            $("#currentIcon").addClass("fa-cloud-rain").removeClass("fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt fa-exclamation-circle");
         } else {
-            target.addClass("fa-exclamation-circle").removeClass("fa-cloud-rain fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt");
+            $("#currentIcon").addClass("fa-exclamation-circle").removeClass("fa-cloud-rain fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt");
         };
     };
 
