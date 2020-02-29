@@ -66,6 +66,7 @@ $(document).ready(function () {
             localStorage.setItem("cityList", JSON.stringify(cityList))
             $("#input").val("");
         });
+        // when the input is not a vaild city an alert appear
         $(document).ajaxError(function () {
             $("#error").show();
         });
@@ -112,9 +113,11 @@ $(document).ready(function () {
 
     function addBttn(cityName) {
         var upper = cityName.toUpperCase();
+        // if the input is already in the list
         if (cityList.indexOf(upper) !== -1) {
             alert("Already has this city");
         } else {
+            // add city to the list and generate bttn
             cityList.push(upper);
             var bttn = $("<button>");
             bttn.attr("data-name", upper);
@@ -138,17 +141,15 @@ $(document).ready(function () {
         }).then(function (response) {
             console.log(response);
             var list = response.list;
+            // get details from the response
             for (var i = 0; i < list.length; i = i + 8) {
-                // create the html that you have in the other file
-                // load the data in to that html as you're building it
-                // attach the html to the screen
-                // worry about bootstraps rows/columns later
                 var cardTitle = list[i].dt_txt;
                 var temp = list[i].main.temp;
                 var wind = list[i].wind.speed;
                 var hum = list[i].main.humidity;
                 var weather = list[i].weather[0].main;
                 var weatherDescription = list[i].weather[0].description;
+                // use the information to create card for each day
                 createCard(cardTitle, wind, hum, temp, weather, weatherDescription);
             };
             console.log(response.list);
@@ -157,7 +158,7 @@ $(document).ready(function () {
 
     };
 
-    // create cards for 5 day forecast
+    // create cards for 5 day forecast with details
     function createCard(cardTitle, wind, hum, temp, weather, weatherDescription) {
         var colDiv = $("<div>");
         colDiv.addClass("col-lg-4 col-md-6 col-sm-6 col-12 w-auto");
@@ -171,6 +172,7 @@ $(document).ready(function () {
         descriptionP.text(weatherDescription);
         var icon = $("<i>");
         icon.addClass("fas fa-2x");
+        // check the weather icon
         if (weather == "Snow") {
             icon.addClass("fa-snowflake").removeClass("fa-sun fa-cloud fa-cloud-rain fa-cloud-showers-heavy fa-bolt fa-exclamation-circle");
         } else if (weather == "Clear") {
@@ -192,6 +194,7 @@ $(document).ready(function () {
         humP.text("Humidity: " + hum + "%");
         var tempP = $("<p>");
         tempP.text("Temperature: " + temp + " °C");
+        // append all elements
         cardBodyDiv.append(cardTitle, icon, descriptionP, windP, humP, tempP);
         cardDiv.append(cardBodyDiv);
         colDiv.append(cardDiv);
@@ -232,7 +235,6 @@ $(document).ready(function () {
             var lat = response.coord.lat;
             var lon = response.coord.lon;
             getUVIndex(lat, lon);
-
             var weather = response.weather[0].main;
             changeIcon(weather);
             $("#description").text(response.weather[0].description);
@@ -246,10 +248,6 @@ $(document).ready(function () {
                 $("#forecastDiv").empty();
                 var list = response.list;
                 for (var i = 0; i < list.length; i = i + 8) {
-                    // create the html that you have in the other file
-                    // load the data in to that html as you're building it
-                    // attach the html to the screen
-                    // worry about bootstraps rows/columns later
                     var cardTitle = list[i].dt_txt;
                     var temp = list[i].main.temp;
                     var wind = list[i].wind.speed;
