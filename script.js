@@ -56,12 +56,6 @@ $(document).ready(function () {
             // call function to get uv index
             getUVIndex(lat, lon);
 
-            // var bttn = $("<button>");
-            // bttn.attr("data-name", cityName);
-            // bttn.text(cityName);
-            // bttn.addClass("city btn btn-lg btn-primary");
-            // $("#buttonDiv").append(bttn);
-
             // local storage
             localStorage.setItem("cityList", JSON.stringify(cityList))
             $("#input").val("");
@@ -222,9 +216,9 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             $("h2").text(city);
-            $(".wind").text(response.wind.speed + "m/s");
+            $(".wind").text(response.wind.speed + " m/s");
             $(".humidity").text(response.main.humidity + "%");
-            $(".temp").text(response.main.temp + "°C");
+            $(".temp").text(response.main.temp + " °C");
             var lat = response.coord.lat;
             var lon = response.coord.lon;
             getUVIndex(lat, lon);
