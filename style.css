@@ -1,0 +1,70 @@
+/* heading */
+.heading{
+    background-color: rebeccapurple;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 200px;
+}
+
+nav{
+    font-size: 30px;
+    padding-top: 10px;
+}
+
+.heading p{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* left side on big screen */
+form{
+    justify-content: center;
+}
+
+#input{
+    margin-left: 10px;
+    width: 230px;
+}
+
+h4{
+    text-align: center;
+    padding-top: 10px;
+}
+
+/* city button */
+.city{
+    display: block;
+    background-color: rebeccapurple;
+    border: none;
+    width: 200px;
+    margin: 0 auto 10px auto;
+}
+
+/* right side on big screen */
+h2{
+    padding: 10px;
+}
+
+h3{
+    padding:10px;
+}
+
+.weather{
+    font-size: 20px;
+}
+
+.warning{
+    width: 100px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* forecast section */
+.cardMargin{
+    margin-bottom: 10px;
+}
+
+
+
