@@ -26,7 +26,7 @@ $(document).ready(function () {
     var cityList = [];
 
     $("#search").click(getWeather);
-    // $("#search").click(fiveDayForecast);
+    $("#search").click(fiveDayForecast);
     $(document).on("click", ".city", displayInfo);
     $("#error").on("click", function () {
         $(this).hide();
@@ -48,7 +48,7 @@ $(document).ready(function () {
             addBttn(cityName);
             // show information
             $(".weather").css("display", "block");
-            $("#cityTitle").text(cityName);
+            $("#cityTitle").text(cityName.toUpperCase());
             $(".wind").text(response.wind.speed + " m/s");
             $(".humidity").text(response.main.humidity + "%");
             $(".temp").text(response.main.temp + " °C");
