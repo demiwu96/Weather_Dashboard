@@ -20,21 +20,41 @@ function update() {
 
 $(document).ready(function () {
     $("#error").hide();
+    $("#fullForecast").hide();
     displayBttn();
 
     var APIKey = "e8c4953eaa486f7433658a72934020a9";
     var cityList = [];
 
-    $("#search").click(getWeather);
-    $("#search").click(fiveDayForecast);
+    $("#search").click(function () {
+        event.preventDefault();
+        getWeather();
+    });
+    $("#search").click(function () {
+        event.preventDefault();
+        fiveDayForecast();
+    });
     $(document).on("click", ".city", displayInfo);
     $("#error").on("click", function () {
         $(this).hide();
     });
+    $(".more").click(function () {
+        var status = $(".more").attr("data-status");
+        if (status == "none") {
+            $("#fullForecast").show();
+            $(".more").text("Less details");
+            $(".more").attr("data-status", "full");
+            alert("show section");
+        } else if (status == "full") {
+            $("#fullForecast").hide();
+            $(".more").text("More details");
+            $(".more").attr("data-status", "none");
+            alert("hide section");
+        };
+    });
 
     // get current weather
     function getWeather() {
-        event.preventDefault();
         // get input value
         var cityName = $("#input").val();
         // URL 
@@ -129,7 +149,6 @@ $(document).ready(function () {
 
     // get 5 day forecast
     function fiveDayForecast() {
-        event.preventDefault();
         $("#forecastDiv").empty();
         var cityName = $("#input").val();
         // URL 
@@ -143,23 +162,31 @@ $(document).ready(function () {
             var list = response.list;
             // get details from the response
             for (var i = 0; i < list.length; i = i + 8) {
-                var cardTitle = list[i].dt_txt;
+                var showTime = list[i].dt_txt;
                 var temp = list[i].main.temp;
                 var wind = list[i].wind.speed;
                 var hum = list[i].main.humidity;
                 var weather = list[i].weather[0].main;
                 var weatherDescription = list[i].weather[0].description;
                 // use the information to create card for each day
-                createCard(cardTitle, wind, hum, temp, weather, weatherDescription);
+                createCard(showTime, wind, hum, temp, weather, weatherDescription);
             };
-            console.log(response.list);
-            console.log(cardTitle);
+
+            for (var i = 0; i < list.length; i++) {
+                var showTime = list[i].dt_txt;
+                var temp = list[i].main.temp;
+                var wind = list[i].wind.speed;
+                var hum = list[i].main.humidity;
+                var weatherDescription = list[i].weather[0].description;
+                createTable(showTime, wind, hum, temp, weatherDescription);
+            };
+            console.log("create table");
         });
 
     };
 
     // create cards for 5 day forecast with details
-    function createCard(cardTitle, wind, hum, temp, weather, weatherDescription) {
+    function createCard(showTime, wind, hum, temp, weather, weatherDescription) {
         var colDiv = $("<div>");
         colDiv.addClass("col-lg-4 col-md-6 col-sm-6 col-12 w-auto");
         var cardDiv = $("<div>");
@@ -167,7 +194,7 @@ $(document).ready(function () {
         var cardBodyDiv = $("<div>");
         cardBodyDiv.addClass("card-body");
         var cardTitle = $("<h5>");
-        cardTitle.text(cardTitle);
+        cardTitle.text(showTime).html();
         var descriptionP = $("<p>");
         descriptionP.text(weatherDescription);
         var icon = $("<i>");
@@ -201,9 +228,25 @@ $(document).ready(function () {
         $("#forecastDiv").append(colDiv);
     };
 
+    function createTable(showTime, wind, hum, temp, weatherDescription) {
+        var row = $("<tr>");
+        var timeDateD = $("<td>");
+        timeDateD.text(showTime).html();
+        var weatherD = $("<td>");
+        weatherD.text(weatherDescription);
+        var windD = $("<td>");
+        windD.text(wind + " m/s");
+        var humD = $("<td>");
+        humD.text(hum + "%");
+        var tempD = $("<td>");
+        tempD.text(temp + " °C");
+        row.append(timeDateD, weatherD, windD, humD, tempD);
+        $("tbody").append(row);
+    };
+
     // display city bttn from local storage
     function displayBttn() {
-        var cityList = JSON.parse(localStorage.getItem("cityList"));
+        cityList = JSON.parse(localStorage.getItem("cityList"));
         if (!cityList) {
             return;
         };
@@ -255,6 +298,14 @@ $(document).ready(function () {
                     var weather = list[i].weather[0].main;
                     var weatherDescription = list[i].weather[0].description;
                     createCard(cardTitle, wind, hum, temp, weather, weatherDescription);
+                };
+                for (var i = 0; i < list.length; i++) {
+                    var showTime = list[i].dt_txt;
+                    var temp = list[i].main.temp;
+                    var wind = list[i].wind.speed;
+                    var hum = list[i].main.humidity;
+                    var weatherDescription = list[i].weather[0].description;
+                    createTable(showTime, wind, hum, temp, weatherDescription);
                 };
             });
         });

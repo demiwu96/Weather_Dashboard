@@ -89,4 +89,13 @@ h3{
     margin-bottom: 10px;
 }
 
+.more{
+    background-color: rebeccapurple;
+    color: white;
+    font-family: 'Abril Fatface';
+    text-decoration: none;
+    margin: 10px;
+    border: none;
+    padding: 10px;
+}
 
