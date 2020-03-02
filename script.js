@@ -22,6 +22,7 @@ $(document).ready(function () {
     $("#error").hide();
     $("#fullForecast").hide();
     displayBttn();
+    updateDetails();
 
     var APIKey = "e8c4953eaa486f7433658a72934020a9";
     var cityList = [];
@@ -44,12 +45,10 @@ $(document).ready(function () {
             $("#fullForecast").show();
             $(".more").text("Less details");
             $(".more").attr("data-status", "full");
-            alert("show section");
         } else if (status == "full") {
             $("#fullForecast").hide();
             $(".more").text("More details");
             $(".more").attr("data-status", "none");
-            alert("hide section");
         };
     });
 
@@ -158,7 +157,6 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
             var list = response.list;
             // get details from the response
             for (var i = 0; i < list.length; i = i + 8) {
@@ -172,6 +170,7 @@ $(document).ready(function () {
                 createCard(showTime, wind, hum, temp, weather, weatherDescription);
             };
 
+            $("tbody").empty();
             for (var i = 0; i < list.length; i++) {
                 var showTime = list[i].dt_txt;
                 var temp = list[i].main.temp;
@@ -180,7 +179,6 @@ $(document).ready(function () {
                 var weatherDescription = list[i].weather[0].description;
                 createTable(showTime, wind, hum, temp, weatherDescription);
             };
-            console.log("create table");
         });
 
     };
@@ -299,6 +297,7 @@ $(document).ready(function () {
                     var weatherDescription = list[i].weather[0].description;
                     createCard(cardTitle, wind, hum, temp, weather, weatherDescription);
                 };
+                $("tbody").empty();
                 for (var i = 0; i < list.length; i++) {
                     var showTime = list[i].dt_txt;
                     var temp = list[i].main.temp;
@@ -309,9 +308,6 @@ $(document).ready(function () {
                 };
             });
         });
-
-
-
     };
 
     // change weather icons
@@ -331,5 +327,63 @@ $(document).ready(function () {
         } else {
             $("#currentIcon").addClass("fa-exclamation-circle").removeClass("fa-cloud-rain fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt");
         };
+    };
+
+    // update data
+    function updateDetails() {
+        cityList = JSON.parse(localStorage.getItem("cityList"));
+        if (!cityList) {
+            return;
+        };
+        for (var i = 0; i < cityList.length; i++) {
+            var city = cityList[i];
+            var queryURL = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=" + city + "&appid=" + APIKey;
+            //AJAX
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                $("#cityTitle").text(city);
+                $(".wind").text(response.wind.speed + " m/s");
+                $(".humidity").text(response.main.humidity + "%");
+                $(".temp").text(response.main.temp + " °C");
+                $(".weather").css("display", "block");
+                var lat = response.coord.lat;
+                var lon = response.coord.lon;
+                getUVIndex(lat, lon);
+                var weather = response.weather[0].main;
+                changeIcon(weather);
+                $("#description").text(response.weather[0].description);
+            }).then(function () {
+                var URL = "https://api.openweathermap.org/data/2.5/forecast?&units=metric&q=" + city + "&appid=" + APIKey;
+                //AJAX
+                $.ajax({
+                    url: URL,
+                    method: "GET"
+                }).then(function (response) {
+                    $("#forecastDiv").empty();
+                    var list = response.list;
+                    for (var i = 0; i < list.length; i = i + 8) {
+                        var cardTitle = list[i].dt_txt;
+                        var temp = list[i].main.temp;
+                        var wind = list[i].wind.speed;
+                        var hum = list[i].main.humidity;
+                        var weather = list[i].weather[0].main;
+                        var weatherDescription = list[i].weather[0].description;
+                        createCard(cardTitle, wind, hum, temp, weather, weatherDescription);
+                    };
+                    $("tbody").empty();
+                    for (var i = 0; i < list.length; i++) {
+                        var showTime = list[i].dt_txt;
+                        var temp = list[i].main.temp;
+                        var wind = list[i].wind.speed;
+                        var hum = list[i].main.humidity;
+                        var weatherDescription = list[i].weather[0].description;
+                        createTable(showTime, wind, hum, temp, weatherDescription);
+                    };
+                });
+            });
+        }
+        setInterval(updateDetails, 1.8e+6);
     };
 });
