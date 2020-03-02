@@ -24,4 +24,4 @@ The users can see:
 Yu-Hsuan Wu
 
 ## Take a look
-[Click here]() to look at my project
+[Click here](https://demiwu96.github.io/Weather_Dashboard/) to look at my project
