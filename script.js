@@ -23,7 +23,7 @@ $(document).ready(function () {
     $("#fullForecast").hide();
     displayBttn();
 
-    var APIKey = "e8c4953eaa486f7433658a72934020a9";
+    var APIKey = "9fa597697a93a55f3f34b67ee718d8df";
     var cityList = [];
 
     $("#search").click(function () {
