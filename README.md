@@ -1,7 +1,7 @@
 # Weather Dashboard
 
 ## Description
-Use the website to check the weather at different cities. The user can check current weather and 5-day weather forecast at certain time. Click on "more details" to show the full weather forecast for the next 5 days can. Recent search history will be stored on the side for users to access in the future.
+Use the website to check the weather at different cities. The user can check current weather and 5-day weather forecast at certain time. Click on "more details" to show the full weather forecast for the next 5 days. Recent search history will be stored on the side for users to access in the future.
 
 The users can see:
 * the weather
