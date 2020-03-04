@@ -327,5 +327,4 @@ $(document).ready(function () {
             $("#currentIcon").addClass("fa-exclamation-circle").removeClass("fa-cloud-rain fa-sun fa-cloud fa-cloud-showers-heavy fa-snowflake fa-bolt");
         };
     };
-
 });
