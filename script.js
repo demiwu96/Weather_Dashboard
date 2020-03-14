@@ -279,6 +279,7 @@ $(document).ready(function () {
             changeIcon(weather);
             $("#description").text(response.weather[0].description);
         }).then(function () {
+            $("#title").show();
             var URL = "https://api.openweathermap.org/data/2.5/forecast?&units=metric&q=" + city + "&appid=" + APIKey;
             //AJAX
             $.ajax({

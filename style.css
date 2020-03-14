@@ -85,6 +85,16 @@ h3{
 }
 
 /* forecast section */
+#title{
+    padding-top: 10px;
+    background-color: rgb(175, 202, 253);
+    margin: 0 auto;
+}
+
+#forecastDiv{
+    padding-bottom: 30px;
+}
+
 .cardMargin{
     margin-bottom: 10px;
 }
