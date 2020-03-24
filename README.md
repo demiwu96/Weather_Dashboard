@@ -12,6 +12,7 @@ The users can see:
 
 ## Built with
 * HTML
+* Bootstrap
 * CSS
 * javaScript
 * jQuery
